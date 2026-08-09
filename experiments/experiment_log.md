@@ -163,3 +163,38 @@ prioritizes identifying as many potential churners as possible.
 
 Select the threshold using validation data and perform a final evaluation
 on the untouched test set.
+
+
+## Experiment 005 — Model Comparison
+
+### Objective
+
+Compare Random Forest and XGBoost to identify the most suitable model
+for the customer churn decision-support system.
+
+### Results
+
+| Model | Threshold | Accuracy | Churn Precision | Churn Recall | Churn F1 | ROC-AUC |
+|---|---:|---:|---:|---:|---:|---:|
+| Random Forest | 0.35 | 0.805 | 0.445 | 0.302 | 0.360 | 0.738 |
+| XGBoost | 0.55 | 0.722 | 0.348 | 0.609 | 0.443 | 0.750 |
+
+### Conclusion
+
+Random Forest achieved higher overall accuracy and churn precision.
+However, its churn recall was only 30.2%, meaning that the majority
+of customers who actually churned were not identified.
+
+XGBoost achieved a substantially higher churn recall of 60.9% and a
+higher churn F1-score of 0.443. It also achieved a slightly higher
+ROC-AUC of 0.750.
+
+Since the objective of the system is to identify customers at risk of
+churn and support retention decisions, identifying potential churners
+is more important than maximizing overall accuracy.
+
+Therefore, XGBoost with a threshold of 0.55 is selected as the current
+candidate model.
+
+The lower precision of XGBoost will be considered when designing the
+retention strategy layer.
