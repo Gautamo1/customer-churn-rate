@@ -120,3 +120,46 @@ data and then evaluated once on the untouched test set.
 
 Evaluate XGBoost and compare its performance against the Random Forest,
 using churn recall, precision, F1-score, and PR-AUC as key metrics.
+
+
+## Experiment 004 — XGBoost Threshold Tuning
+
+### Objective
+
+Determine whether adjusting the XGBoost classification threshold can
+improve the precision-recall trade-off for churn prediction.
+
+### Results
+
+| Threshold | Precision | Recall | F1 |
+|---:|---:|---:|---:|
+| 0.55 | 0.348 | 0.607 | 0.443 |
+| 0.54 | 0.343 | 0.624 | 0.442 |
+| 0.53 | 0.339 | 0.641 | 0.442 |
+| 0.52 | 0.332 | 0.655 | 0.441 |
+| 0.51 | 0.328 | 0.668 | 0.439 |
+| 0.50 | 0.328 | 0.668 | 0.439 |
+| 0.49 | 0.323 | 0.682 | 0.439 |
+| 0.48 | 0.319 | 0.696 | 0.437 |
+| 0.47 | 0.315 | 0.713 | 0.437 |
+| 0.46 | 0.305 | 0.737 | 0.431 |
+
+### Observations
+
+Lowering the threshold increases churn recall but decreases precision.
+The highest F1-score in the evaluated range is approximately 0.443
+at a threshold of 0.55.
+
+### Conclusion
+
+XGBoost provides a better balance between churn precision and recall
+than the Random Forest baseline. A threshold around 0.55 is a strong
+candidate operating point if F1 is prioritized.
+
+A lower threshold such as 0.46 could be considered if the business
+prioritizes identifying as many potential churners as possible.
+
+### Next Step
+
+Select the threshold using validation data and perform a final evaluation
+on the untouched test set.
