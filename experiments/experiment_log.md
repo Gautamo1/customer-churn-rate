@@ -122,7 +122,7 @@ Evaluate XGBoost and compare its performance against the Random Forest,
 using churn recall, precision, F1-score, and PR-AUC as key metrics.
 
 
-## Experiment 004 — XGBoost Threshold Tuning
+## Experiment 003 — XGBoost Threshold Tuning
 
 ### Objective
 
@@ -165,7 +165,7 @@ Select the threshold using validation data and perform a final evaluation
 on the untouched test set.
 
 
-## Experiment 005 — Model Comparison
+## Experiment 004 — Model Comparison
 
 ### Objective
 

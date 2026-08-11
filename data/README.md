@@ -8,7 +8,7 @@ The dataset used in this project is:
 
 Source: Kaggle — Safrin03
 
-[Kaggle Dataset](https://www.kaggle.com/datasets/safrin03/predictive-analytics-for-customer-churn-dataset?utm_source=chatgpt.com)
+[Kaggle Dataset](https://www.kaggle.com/datasets/safrin03/predictive-analytics-for-customer-churn-dataset)
 
 The dataset contains customer-level information from a subscription-based content streaming service. It includes account information, billing details, subscription preferences, viewing behavior, customer preferences, and support activity.
 
