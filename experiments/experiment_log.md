@@ -198,3 +198,67 @@ candidate model.
 
 The lower precision of XGBoost will be considered when designing the
 retention strategy layer.
+
+
+## Experiment 005 — XGBoost RandomizedSearch (Recall@Top30%)
+
+**Date:** 2026-08-12
+
+### Notebook
+
+- `notebooks/07_hyperparameter_tuningXGB.ipynb`
+
+### Objective
+
+Optimize recall for churners among the top 30% of predicted probabilities (business targeting constraint). Hyperparameter search uses a custom scorer that computes recall when the top 30% highest-probability customers are treated as positives.
+
+### Best search results
+
+- Best parameters:
+
+```
+{'subsample': 0.8, 'reg_lambda': 0.1, 'reg_alpha': 1, 'n_estimators': 300, 'min_child_weight': 5, 'max_depth': 4, 'learning_rate': 0.03, 'gamma': 0.3, 'colsample_bytree': 0.9}
+```
+
+- Best cross-validation score (recall@top30%): `0.5863064082614231`
+
+### Test-set evaluation (threshold = 0.50 as in notebook)
+
+Confusion matrix:
+
+| | Predicted Stayed | Predicted Churned |
+|---|---:|---:|
+| Actual Stayed | 26,751 | 13,170 |
+| Actual Churned | 2,657 | 6,180 |
+
+Classification report:
+
+| class | precision | recall | f1-score | support |
+|---:|---:|---:|---:|---:|
+| 0 | 0.91 | 0.67 | 0.77 | 39,921 |
+| 1 | 0.32 | 0.70 | 0.44 | 8,837 |
+
+Overall:
+
+- Accuracy: 0.68
+- Macro avg (precision, recall, f1): 0.61, 0.68, 0.61
+- Weighted avg (precision, recall, f1): 0.80, 0.68, 0.71
+
+ROC-AUC: `0.7527266898123568`
+
+PR-AUC: `0.4063486644365407`
+
+### Notes & next steps
+
+- The model delivers substantially higher recall for the churn class at
+  the evaluated threshold, but precision for churn is low (0.32). This
+  matches the objective prioritizing recall within a top-30% outreach
+  budget.
+- Save `best_model` to `models/` with a timestamped filename for
+  reproducibility and add the saved artifact path to this log entry.
+- Consider validating the chosen operating point on a held-out fold or
+  across multiple random splits to ensure stability of recall@top30%.
+
+---
+
+*Entry appended with supplied metrics.*
