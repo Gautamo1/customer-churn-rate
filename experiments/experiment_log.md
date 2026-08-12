@@ -176,28 +176,28 @@ for the customer churn decision-support system.
 
 | Model | Threshold | Accuracy | Churn Precision | Churn Recall | Churn F1 | ROC-AUC |
 |---|---:|---:|---:|---:|---:|---:|
-| Random Forest | 0.35 | 0.805 | 0.445 | 0.302 | 0.360 | 0.738 |
-| XGBoost | 0.55 | 0.722 | 0.348 | 0.609 | 0.443 | 0.750 |
+| Random Forest | 0.35 | 0.7006439968825628 | 0.3287133424543436 | 0.6252533666527102 | 0.4309107922645041 | 0.7382742481411539 |
+| XGBoost | 0.55 | 0.7220968866647525 | 0.3476827612953267 | 0.6086907321489193 | 0.4425703472107948 | 0.7503863881873953 |
 
 ### Conclusion
 
-Random Forest achieved higher overall accuracy and churn precision.
-However, its churn recall was only 30.2%, meaning that the majority
-of customers who actually churned were not identified.
+XGBoost shows slightly better overall accuracy (`0.7221` vs `0.7006`), higher
+churn precision (`0.3477` vs `0.3287`), a marginally higher churn F1-score
+(`0.4426` vs `0.4309`), and a higher ROC-AUC (`0.7504` vs `0.7383`).
 
-XGBoost achieved a substantially higher churn recall of 60.9% and a
-higher churn F1-score of 0.443. It also achieved a slightly higher
-ROC-AUC of 0.750.
+Random Forest delivers higher churn recall (`0.6253` vs `0.6087`), so it
+identifies a larger share of true churners at the evaluated threshold.
 
-Since the objective of the system is to identify customers at risk of
-churn and support retention decisions, identifying potential churners
-is more important than maximizing overall accuracy.
+Because the project objective prioritizes identifying at-risk customers
+while balancing operational costs, XGBoost (threshold `0.55`) is
+preferred here for its overall stronger balance of precision, F1 and
+ROC-AUC. If maximizing raw recall is the single highest priority, the
+Random Forest operating point (threshold `0.35`) remains a valid
+alternative.
 
-Therefore, XGBoost with a threshold of 0.55 is selected as the current
-candidate model.
-
-The lower precision of XGBoost will be considered when designing the
-retention strategy layer.
+Consider the downstream retention strategy when choosing between the
+two: XGBoost reduces false positives at similar recall, while Random
+Forest finds slightly more churners but with lower precision.
 
 
 ## Experiment 005 — XGBoost RandomizedSearch (Recall@Top30%)
